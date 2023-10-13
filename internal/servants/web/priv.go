@@ -6,6 +6,7 @@ package web
 
 import (
 	"image"
+	"os"
 	"strings"
 	"time"
 
@@ -129,7 +130,12 @@ func (s *privSrv) UploadAttachment(req *web.UploadAttachmentReq) (*web.UploadAtt
 
 	// 生成随机路径
 	randomPath := uuid.Must(uuid.NewV4()).String()
+	ossBaseDIR := os.Getenv("OSS_BASE_DIR")
 	ossSavePath := req.UploadType + "/" + generatePath(randomPath[:8]) + "/" + randomPath[9:] + req.FileExt
+	if ossBaseDIR != "" {
+		ossSavePath = ossBaseDIR + "/" + ossSavePath
+	}
+
 	objectUrl, err := s.oss.PutObject(ossSavePath, req.File, req.FileSize, req.ContentType, false)
 	if err != nil {
 		logrus.Errorf("oss.putObject err: %s", err)

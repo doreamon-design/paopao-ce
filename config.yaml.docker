@@ -127,6 +127,7 @@ AliOSS: # 阿里云OSS存储配置
   AccessKeySecret: <OSS_ACCESS_KEY_SECRET> 
   Bucket: <OSS_BUCKET>
   Domain: <OSS_DOMAIN>
+  BaseDir: <OSS_BASE_DIR>
 COS: # 腾讯云COS存储配置
   SecretID: 
   SecretKey: 

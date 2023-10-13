@@ -124,6 +124,7 @@ if [ ! -f "/app/paopao-ce/config.yaml" ]; then
     sed "s%<OSS_ACCESS_KEY_SECRET>%${OSS_ACCESS_KEY_SECRET}%g" |
     sed "s%<OSS_BUCKET>%${OSS_BUCKET}%g" |
     sed "s%<OSS_ENDPOINT>%${OSS_ENDPOINT}%g" |
+    sed "s%<OSS_BASE_DIR>%${OSS_BASE_DIR}%g" |
     sed "s%<OSS_DOMAIN>%${OSS_DOMAIN}%g" >/app/paopao-ce/config.yaml
 fi
 
