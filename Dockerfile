@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:experimental
 
 # build frontend
-FROM node:19-alpine as frontend
+FROM whatwewant/builder-node:v18-1 as frontend
 ARG API_HOST
 ARG USE_API_HOST=yes
 ARG EMBED_UI=yes
@@ -13,7 +13,7 @@ RUN [ $EMBED_UI != yes ] || [ $USE_DIST != no ] || (yarn && yarn build)
 RUN [ $EMBED_UI = yes ] || mkdir dist || echo ""
 
 # build backend
-FROM bitbus/paopao-ce-backend-builder:latest AS backend
+FROM whatwewant/builder-go:v1.20-1 AS backend
 ARG API_HOST
 ARG USE_API_HOST=yes
 ARG EMBED_UI=yes
