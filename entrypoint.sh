@@ -56,8 +56,8 @@ fi
 #   exit 1
 # fi
 
-# if [ -z "$SERVICE_PAOPAO_REDIS_DB" ]; then
-#   echo "SERVICE_PAOPAO_REDIS_DB is required"
+# if [ -z "$REDIS_DB" ]; then
+#   echo "REDIS_DB is required"
 #   exit 1
 # fi
 
@@ -111,11 +111,11 @@ cat /etc/config.yaml.docker |
     sed "s%<DATABASE_USERNAME>%${DATABASE_USERNAME}%g" |
     sed "s%<DATABASE_PASSWORD>%${DATABASE_PASSWORD}%g" |
     sed "s%<DATABASE_NAME>%${DATABASE_NAME}%g" |
-    sed "s%<SERVICE_PAOPAO_REDIS_HOST>%${SERVICE_PAOPAO_REDIS_HOST}%g" |
-    sed "s%<SERVICE_PAOPAO_REDIS_PORT>%${SERVICE_PAOPAO_REDIS_PORT}%g" |
-    sed "s%<SERVICE_PAOPAO_REDIS_USERNAME>%${SERVICE_PAOPAO_REDIS_USERNAME}%g" |
-    sed "s%<SERVICE_PAOPAO_REDIS_PASSWORD>%${SERVICE_PAOPAO_REDIS_PASSWORD}%g" |
-    sed "s%<SERVICE_PAOPAO_REDIS_DB>%${SERVICE_PAOPAO_REDIS_DB}%g" |
+    sed "s%<REDIS_HOST>%${REDIS_HOST}%g" |
+    sed "s%<REDIS_PORT>%${REDIS_PORT}%g" |
+    sed "s%<REDIS_USERNAME>%${REDIS_USERNAME}%g" |
+    sed "s%<REDIS_PASSWORD>%${REDIS_PASSWORD}%g" |
+    sed "s%<REDIS_DB>%${REDIS_DB}%g" |
     sed "s%<MEILISEARCH_HOST>%${MEILISEARCH_HOST}%g" |
     sed "s%<MEILISEARCH_PORT>%${MEILISEARCH_PORT}%g" |
     sed "s%<MEILISEARCH_MASTER_KEY>%${MEILISEARCH_MASTER_KEY}%g" |

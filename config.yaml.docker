@@ -182,10 +182,10 @@ Sqlite3: # Sqlite3数据库
   Path: custom/data/sqlite3/paopao-ce.db
 Redis:
   InitAddress:
-    - <SERVICE_PAOPAO_REDIS_HOST>:<SERVICE_PAOPAO_REDIS_PORT>
-  Username: <SERVICE_PAOPAO_REDIS_USERNAME>
-  Password: <SERVICE_PAOPAO_REDIS_PASSWORD>
-  SelectDB: <SERVICE_PAOPAO_REDIS_DB>
+    - <REDIS_HOST>:<REDIS_PORT>
+  Username: <REDIS_USERNAME>
+  Password: <REDIS_PASSWORD>
+  SelectDB: <REDIS_DB>
 WebProfile:
   UseFriendship: true              # 前端是否使用好友体系
   EnableTrendsBar: true            # 广场页面是否开启动态条栏功能
