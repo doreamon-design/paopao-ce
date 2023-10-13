@@ -125,4 +125,4 @@ cat /etc/config.yaml.docker |
     sed "s%<OSS_ENDPOINT>%${OSS_ENDPOINT}%g" |
     sed "s%<OSS_DOMAIN>%${OSS_DOMAIN}%g" >/app/paopao-ce/config.yaml
 
-serve
+/app/paopao-ce/paopao serve
