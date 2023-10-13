@@ -42,7 +42,7 @@ VOLUME ["/app/paopao-ce/custom"]
 EXPOSE 8008
 HEALTHCHECK --interval=5s --timeout=3s  --retries=3  CMD ps -ef | grep paopao || exit 1
 
-COPY ./config.yaml.docker /etc/paopao/config.yaml.docker
+COPY ./config.yaml.docker /etc/paopao-ce/config.yaml.docker
 
 COPY ./entrypoint.sh /entrypoint.sh
 

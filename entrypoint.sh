@@ -104,7 +104,7 @@ if [ -z "$OSS_DOMAIN" ]; then
 fi
 
 if [ ! -f "/app/paopao-ce/config.yaml" ]; then
-cat /etc/config.yaml.docker |
+  cat /etc/paopao-ce/config.yaml.docker |
     sed "s%<COMPANY_NAME>%${COMPANY_NAME}%g" |
     sed "s%<COMPANY_DOMAIN>%${COMPANY_DOMAIN}%g" |
     sed "s%<DATABASE_HOST>%${DATABASE_HOST}%g" |
