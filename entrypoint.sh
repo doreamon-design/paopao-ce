@@ -46,20 +46,20 @@ if [ -z "$SERVICE_PAOPAO_CE_REDIS_PORT" ]; then
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_REDIS_USERNAME" ]; then
-  echo "SERVICE_PAOPAO_CE_REDIS_USERNAME is required"
-  exit 1
-fi
+# if [ -z "$SERVICE_PAOPAO_CE_REDIS_USERNAME" ]; then
+#   echo "SERVICE_PAOPAO_CE_REDIS_USERNAME is required"
+#   exit 1
+# fi
 
-if [ -z "$SERVICE_PAOPAO_CE_REDIS_PASSWORD" ]; then
-  echo "SERVICE_PAOPAO_CE_REDIS_PASSWORD is required"
-  exit 1
-fi
+# if [ -z "$SERVICE_PAOPAO_CE_REDIS_PASSWORD" ]; then
+#   echo "SERVICE_PAOPAO_CE_REDIS_PASSWORD is required"
+#   exit 1
+# fi
 
-if [ -z "$SERVICE_PAOPAO_REDIS_DB" ]; then
-  echo "SERVICE_PAOPAO_REDIS_DB is required"
-  exit 1
-fi
+# if [ -z "$SERVICE_PAOPAO_REDIS_DB" ]; then
+#   echo "SERVICE_PAOPAO_REDIS_DB is required"
+#   exit 1
+# fi
 
 if [ -z "$SERVICE_PAOPAO_CE_MEILISEARCH_HOST" ]; then
   echo "SERVICE_PAOPAO_CE_MEILISEARCH_HOST is required"
