@@ -36,7 +36,7 @@ ENV TZ=Asia/Shanghai
 
 WORKDIR /app/paopao-ce
 COPY --from=backend /paopao-ce/release/paopao .
-COPY --from=backend /paopao-ce/config.yaml.sample config.yaml
+# COPY --from=backend /paopao-ce/config.yaml.sample config.yaml
 
 VOLUME ["/app/paopao-ce/custom"]
 EXPOSE 8008
