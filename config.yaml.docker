@@ -24,7 +24,7 @@ Features:
   Sms: "SmsJuhe"
 WebServer: # Web服务
   HttpIp: 0.0.0.0
-  HttpPort: 8008
+  HttpPort: <PORT>
   ReadTimeout: 60
   WriteTimeout: 60
 AdminServer: # Admin后台运维服务
