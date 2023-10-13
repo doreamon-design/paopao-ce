@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:experimental
-
 # build frontend
 FROM whatwewant/builder-node:v18-1 as frontend
 ARG API_HOST
