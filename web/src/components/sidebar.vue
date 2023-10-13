@@ -14,13 +14,13 @@
                     <span class="nickname-txt">
                         {{ store.state.userInfo.nickname }}
                     </span>
-                    <n-button class="logout" quaternary circle size="tiny" @click="handleLogout">
+                    <!-- <n-button class="logout" quaternary circle size="tiny" @click="handleLogout">
                         <template #icon>
                             <n-icon>
                                 <log-out-outline />
                             </n-icon>
                         </template>
-                    </n-button>
+                    </n-button> -->
                 </div>
                 <div class="username">@{{ store.state.userInfo.username }}</div>
             </div>
