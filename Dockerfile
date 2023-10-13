@@ -13,8 +13,8 @@ RUN [ $EMBED_UI != yes ] || [ $USE_DIST != no ] || (yarn && yarn build)
 RUN [ $EMBED_UI = yes ] || mkdir dist || echo ""
 
 # build backend
-# FROM whatwewant/builder-go:v1.20-1 AS backend
-FROM bitbus/paopao-ce-backend-builder:latest AS backend
+FROM whatwewant/builder-go:v1.20-1 AS backend
+# FROM bitbus/paopao-ce-backend-builder:latest AS backend
 ARG API_HOST
 ARG USE_API_HOST=yes
 ARG EMBED_UI=yes
@@ -24,6 +24,7 @@ WORKDIR /paopao-ce
 COPY . .
 COPY --from=frontend /web/dist ./web/dist
 ENV GOPROXY=https://goproxy.cn
+ENV CGO_ENABLED=0
 RUN [ $EMBED_UI != yes ] || make build TAGS='go_json'
 RUN [ $EMBED_UI = yes ] || make build TAGS='slim embed go_json'
 
