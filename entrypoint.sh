@@ -1,58 +1,58 @@
 #!/bin/sh
 
-if [ -z "$SERVICE_PAOPAO_CE_COMPANY_NAME" ]; then
-  echo "SERVICE_PAOPAO_CE_COMPANY_NAME is required"
+if [ -z "$COMPANY_NAME" ]; then
+  echo "COMPANY_NAME is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_COMPANY_DOMAIN" ]; then
-  echo "SERVICE_PAOPAO_CE_COMPANY_DOMAIN is required"
+if [ -z "$COMPANY_DOMAIN" ]; then
+  echo "COMPANY_DOMAIN is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_DATABASE_HOST" ]; then
-  echo "SERVICE_PAOPAO_CE_DATABASE_HOST is required"
+if [ -z "$DATABASE_HOST" ]; then
+  echo "DATABASE_HOST is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_DATABASE_PORT" ]; then
-  echo "SERVICE_PAOPAO_CE_DATABASE_PORT is required"
+if [ -z "$DATABASE_PORT" ]; then
+  echo "DATABASE_PORT is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_DATABASE_USERNAME" ]; then
-  echo "SERVICE_PAOPAO_CE_DATABASE_USERNAME is required"
+if [ -z "$DATABASE_USERNAME" ]; then
+  echo "DATABASE_USERNAME is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_DATABASE_PASSWORD" ]; then
-  echo "SERVICE_PAOPAO_CE_DATABASE_PASSWORD is required"
+if [ -z "$DATABASE_PASSWORD" ]; then
+  echo "DATABASE_PASSWORD is required"
   exit 1
 fi
 
 
-if [ -z "$SERVICE_PAOPAO_CE_DATABASE_NAME" ]; then
-  echo "SERVICE_PAOPAO_CE_DATABASE_NAME is required"
+if [ -z "$DATABASE_NAME" ]; then
+  echo "DATABASE_NAME is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_REDIS_HOST" ]; then
-  echo "SERVICE_PAOPAO_CE_REDIS_HOST is required"
+if [ -z "$REDIS_HOST" ]; then
+  echo "REDIS_HOST is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_REDIS_PORT" ]; then
-  echo "SERVICE_PAOPAO_CE_REDIS_PORT is required"
+if [ -z "$REDIS_PORT" ]; then
+  echo "REDIS_PORT is required"
   exit 1
 fi
 
-# if [ -z "$SERVICE_PAOPAO_CE_REDIS_USERNAME" ]; then
-#   echo "SERVICE_PAOPAO_CE_REDIS_USERNAME is required"
+# if [ -z "$REDIS_USERNAME" ]; then
+#   echo "REDIS_USERNAME is required"
 #   exit 1
 # fi
 
-# if [ -z "$SERVICE_PAOPAO_CE_REDIS_PASSWORD" ]; then
-#   echo "SERVICE_PAOPAO_CE_REDIS_PASSWORD is required"
+# if [ -z "$REDIS_PASSWORD" ]; then
+#   echo "REDIS_PASSWORD is required"
 #   exit 1
 # fi
 
@@ -61,68 +61,68 @@ fi
 #   exit 1
 # fi
 
-if [ -z "$SERVICE_PAOPAO_CE_MEILISEARCH_HOST" ]; then
-  echo "SERVICE_PAOPAO_CE_MEILISEARCH_HOST is required"
+if [ -z "$MEILISEARCH_HOST" ]; then
+  echo "MEILISEARCH_HOST is required"
   exit 1
 fi
 
 
-if [ -z "$SERVICE_PAOPAO_CE_MEILISEARCH_PORT" ]; then
-  echo "SERVICE_PAOPAO_CE_MEILISEARCH_PORT is required"
+if [ -z "$MEILISEARCH_PORT" ]; then
+  echo "MEILISEARCH_PORT is required"
   exit 1
 fi
 
 
-if [ -z "$SERVICE_PAOPAO_CE_MEILISEARCH_MASTER_KEY" ]; then
-  echo "SERVICE_PAOPAO_CE_MEILISEARCH_MASTER_KEY is required"
+if [ -z "$MEILISEARCH_MASTER_KEY" ]; then
+  echo "MEILISEARCH_MASTER_KEY is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_OSS_ACCESS_KEY_ID" ]; then
-  echo "SERVICE_PAOPAO_CE_OSS_ACCESS_KEY_ID is required"
+if [ -z "$OSS_ACCESS_KEY_ID" ]; then
+  echo "OSS_ACCESS_KEY_ID is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_OSS_ACCESS_KEY_SECRET" ]; then
-  echo "SERVICE_PAOPAO_CE_OSS_ACCESS_KEY_SECRET is required"
+if [ -z "$OSS_ACCESS_KEY_SECRET" ]; then
+  echo "OSS_ACCESS_KEY_SECRET is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_OSS_BUCKET" ]; then
-  echo "SERVICE_PAOPAO_CE_OSS_BUCKET is required"
+if [ -z "$OSS_BUCKET" ]; then
+  echo "OSS_BUCKET is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_OSS_ENDPOINT" ]; then
-  echo "SERVICE_PAOPAO_CE_OSS_ENDPOINT is required"
+if [ -z "$OSS_ENDPOINT" ]; then
+  echo "OSS_ENDPOINT is required"
   exit 1
 fi
 
-if [ -z "$SERVICE_PAOPAO_CE_OSS_DOMAIN" ]; then
-  echo "SERVICE_PAOPAO_CE_OSS_DOMAIN is required"
+if [ -z "$OSS_DOMAIN" ]; then
+  echo "OSS_DOMAIN is required"
   exit 1
 fi
 
 cat /etc/config.yaml.docker |
-    sed "s%<SERVICE_PAOPAO_CE_COMPANY_NAME>%${SERVICE_PAOPAO_CE_COMPANY_NAME}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_COMPANY_DOMAIN>%${SERVICE_PAOPAO_CE_COMPANY_DOMAIN}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_DATABASE_HOST>%${SERVICE_PAOPAO_CE_DATABASE_HOST}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_DATABASE_PORT>%${SERVICE_PAOPAO_CE_DATABASE_PORT}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_DATABASE_USERNAME>%${SERVICE_PAOPAO_CE_DATABASE_USERNAME}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_DATABASE_PASSWORD>%${SERVICE_PAOPAO_CE_DATABASE_PASSWORD}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_DATABASE_NAME>%${SERVICE_PAOPAO_CE_DATABASE_NAME}%g" |
+    sed "s%<COMPANY_NAME>%${COMPANY_NAME}%g" |
+    sed "s%<COMPANY_DOMAIN>%${COMPANY_DOMAIN}%g" |
+    sed "s%<DATABASE_HOST>%${DATABASE_HOST}%g" |
+    sed "s%<DATABASE_PORT>%${DATABASE_PORT}%g" |
+    sed "s%<DATABASE_USERNAME>%${DATABASE_USERNAME}%g" |
+    sed "s%<DATABASE_PASSWORD>%${DATABASE_PASSWORD}%g" |
+    sed "s%<DATABASE_NAME>%${DATABASE_NAME}%g" |
     sed "s%<SERVICE_PAOPAO_REDIS_HOST>%${SERVICE_PAOPAO_REDIS_HOST}%g" |
     sed "s%<SERVICE_PAOPAO_REDIS_PORT>%${SERVICE_PAOPAO_REDIS_PORT}%g" |
     sed "s%<SERVICE_PAOPAO_REDIS_USERNAME>%${SERVICE_PAOPAO_REDIS_USERNAME}%g" |
     sed "s%<SERVICE_PAOPAO_REDIS_PASSWORD>%${SERVICE_PAOPAO_REDIS_PASSWORD}%g" |
     sed "s%<SERVICE_PAOPAO_REDIS_DB>%${SERVICE_PAOPAO_REDIS_DB}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_MEILISEARCH_HOST>%${SERVICE_PAOPAO_CE_MEILISEARCH_HOST}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_MEILISEARCH_PORT>%${SERVICE_PAOPAO_CE_MEILISEARCH_PORT}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_MEILISEARCH_MASTER_KEY>%${SERVICE_PAOPAO_CE_MEILISEARCH_MASTER_KEY}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_OSS_ACCESS_KEY_ID>%${SERVICE_PAOPAO_CE_OSS_ACCESS_KEY_ID}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_OSS_ACCESS_KEY_SECRET>%${SERVICE_PAOPAO_CE_OSS_ACCESS_KEY_SECRET}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_OSS_BUCKET>%${SERVICE_PAOPAO_CE_OSS_BUCKET}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_OSS_ENDPOINT>%${SERVICE_PAOPAO_CE_OSS_ENDPOINT}%g" |
-    sed "s%<SERVICE_PAOPAO_CE_OSS_DOMAIN>%${SERVICE_PAOPAO_CE_OSS_DOMAIN}%g" >/app/paopao-ce/config.yaml
+    sed "s%<MEILISEARCH_HOST>%${MEILISEARCH_HOST}%g" |
+    sed "s%<MEILISEARCH_PORT>%${MEILISEARCH_PORT}%g" |
+    sed "s%<MEILISEARCH_MASTER_KEY>%${MEILISEARCH_MASTER_KEY}%g" |
+    sed "s%<OSS_ACCESS_KEY_ID>%${OSS_ACCESS_KEY_ID}%g" |
+    sed "s%<OSS_ACCESS_KEY_SECRET>%${OSS_ACCESS_KEY_SECRET}%g" |
+    sed "s%<OSS_BUCKET>%${OSS_BUCKET}%g" |
+    sed "s%<OSS_ENDPOINT>%${OSS_ENDPOINT}%g" |
+    sed "s%<OSS_DOMAIN>%${OSS_DOMAIN}%g" >/app/paopao-ce/config.yaml
 
 serve
