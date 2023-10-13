@@ -55,6 +55,7 @@ func (s *looseSrv) Timeline(req *web.TimelineReq) (*web.TimelineResp, mir.Error)
 	}
 	res, err := s.Ts.Search(req.User, q, offset, limit)
 	if err != nil {
+		fmt.Println("Ts.Search err: ", err)
 		logrus.Errorf("Ts.Search err: %s", err)
 		return nil, web.ErrGetPostsFailed
 	}
@@ -63,14 +64,18 @@ func (s *looseSrv) Timeline(req *web.TimelineReq) (*web.TimelineResp, mir.Error)
 		logrus.Errorf("Ds.RevampPosts err: %s", err)
 		return nil, web.ErrGetPostsFailed
 	}
+
 	userId := int64(-1)
 	if req.User != nil {
 		userId = req.User.ID
 	}
+
 	if err := s.PrepareTweets(userId, posts); err != nil {
 		logrus.Errorf("timeline occurs error[2]: %s", err)
 		return nil, web.ErrGetPostsFailed
 	}
+
+	fmt.Println("Timeline-5")
 	resp := joint.PageRespFrom(posts, req.Page, req.PageSize, res.Total)
 	return &web.TimelineResp{
 		CachePageResp: joint.CachePageResp{
@@ -172,16 +177,19 @@ func (s *looseSrv) tweetCommentsFromCache(req *web.TweetCommentsReq, limit int, 
 }
 
 func (s *looseSrv) GetUserTweets(req *web.GetUserTweetsReq) (res *web.GetUserTweetsResp, err mir.Error) {
+	fmt.Println("123123")
 	user, xerr := s.RelationTypFrom(req.User, req.Username)
 	if xerr != nil {
 		return nil, err
 	}
 	// 尝试直接从缓存中获取数据
+	fmt.Println("468888")
 	key, ok := "", false
 	if res, key, ok = s.userTweetsFromCache(req, user); ok {
 		// logrus.Debugf("GetUserTweets from cache key:%s", key)
 		return
 	}
+	fmt.Println("77")
 	// 缓存获取未成功，只能查库了
 	switch req.Style {
 	case web.UserPostsStyleComment, web.UserPostsStyleMedia:
