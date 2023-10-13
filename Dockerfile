@@ -26,7 +26,9 @@ ENV GOPROXY=https://goproxy.cn
 RUN [ $EMBED_UI != yes ] || make build TAGS='go_json'
 RUN [ $EMBED_UI = yes ] || make build TAGS='slim embed go_json'
 
-FROM bitbus/paopao-ce-backend-runner:latest
+# FROM bitbus/paopao-ce-backend-runner:latest
+
+FROM whatwewant/alpine:v3.17-1
 ARG API_HOST
 ARG USE_API_HOST=yes
 ARG EMBED_UI=yes
