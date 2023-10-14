@@ -9,7 +9,7 @@ import (
 	"strings"
 	"sync"
 
-	connectMidleware "github.com/go-zoox/connect/pkg/middleware"
+	connect "github.com/go-zoox/connect/user"
 	"github.com/go-zoox/random"
 	"github.com/rocboss/paopao-ce/internal/core"
 	"github.com/rocboss/paopao-ce/internal/core/cs"
@@ -80,7 +80,7 @@ func (s *userManageSrv) GetUserByUsername(username string) (*ms.User, error) {
 
 var GetOrCreateUserByEmailSync = &sync.Mutex{}
 
-func (s *userManageSrv) GetOrCreateUserByEmail(email string, connectUser *connectMidleware.User) (*ms.User, error) {
+func (s *userManageSrv) GetOrCreateUserByEmail(email string, connectUser *connect.User) (*ms.User, error) {
 	GetOrCreateUserByEmailSync.Lock()
 	defer GetOrCreateUserByEmailSync.Unlock()
 
