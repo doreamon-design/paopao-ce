@@ -14,7 +14,7 @@ import (
 	sentrygin "github.com/getsentry/sentry-go/gin"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	connectMidleware "github.com/go-zoox/connect/pkg/middleware"
+	"github.com/go-zoox/connect-middleware-for-gin"
 	"github.com/rocboss/paopao-ce/internal/conf"
 	"github.com/rocboss/paopao-ce/internal/servants"
 	"github.com/rocboss/paopao-ce/internal/servants/base"
@@ -52,21 +52,12 @@ func newWebEngine() *gin.Engine {
 	e.Use(gin.Logger())
 	e.Use(gin.Recovery())
 
-	e.Use(connectMidleware.CreateGinMiddleware(os.Getenv("SECRET_KEY")))
+	e.Use(connect.Create(os.Getenv("SECRET_KEY")))
 	e.Use(func(ctx *gin.Context) {
-		u, ok := ctx.Get(connectMidleware.ContextUserKeyForGin)
-		if !ok {
+		connectUser, err := connect.GetUser(ctx)
+		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"message": "unauthorized (1)",
-			})
-			ctx.Abort()
-			return
-		}
-
-		connectUser, ok := u.(*connectMidleware.User)
-		if !ok {
-			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"message": "unauthorized (2)",
+				"message": fmt.Sprintf("unauthorized (%s)", err),
 			})
 			ctx.Abort()
 			return

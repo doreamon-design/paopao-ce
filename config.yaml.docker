@@ -12,19 +12,19 @@ Server: # 服务设置
   ReadTimeout: 60
   WriteTimeout: 60
 Features:
-  Default: ["Web", "Frontend:EmbedWeb", "Meili", "LocalOSS",  "MySQL", "BigCacheIndex", "LoggerFile"]
-  Develop: ["Base", "MySQL", "BigCacheIndex", "Meili", "Sms", "AliOSS", "LoggerMeili", "OSS:Retention"]
-  Demo: ["Base", "MySQL", "Option", "Zinc", "Sms", "MinIO", "LoggerZinc", "Migration"]
+  Default: ["Web", "Frontend:EmbedWeb", "Meili", "AliOSS",  "Postgres", "BigCacheIndex", "LoggerFile"]
+  Develop: ["Base", "Postgres", "BigCacheIndex", "Meili", "Sms", "AliOSS", "LoggerMeili", "OSS:Retention"]
+  Demo: ["Base", "Postgres", "Option", "Zinc", "Sms", "MinIO", "LoggerZinc", "Migration"]
   Slim: ["Base", "Sqlite3", "LocalOSS", "LoggerFile", "OSS:TempDir"]
   Base: ["Redis", "PhoneBind"]
   Docs: ["Docs:OpenAPI"]
   Deprecated: ["Deprecated:OldWeb"]
-  Service: ["Web", "Admin", "SpaceX", "Bot", "LocalOSS", "Mobile", "Frontend:Web", "Frontend:EmbedWeb", "Docs"]
+  Service: ["Web", "Admin", "SpaceX", "Bot", "LocalOSS", "AliOSS", "Mobile", "Frontend:Web", "Frontend:EmbedWeb", "Docs"]
   Option: ["SimpleCacheIndex"]
   Sms: "SmsJuhe"
 WebServer: # Web服务
   HttpIp: 0.0.0.0
-  HttpPort: 8008
+  HttpPort: <PORT>
   ReadTimeout: 60
   WriteTimeout: 60
 AdminServer: # Admin后台运维服务
@@ -94,9 +94,9 @@ LoggerZinc: # 使用Zinc写日志
   Password: admin
   Secure: False
 LoggerMeili: # 使用Meili写日志
-  Host: 127.0.0.1:7700
+  Host: <MEILISEARCH_HOST>:<MEILISEARCH_PORT>
   Index: paopao-log
-  ApiKey: paopao-meilisearch
+  ApiKey: <MEILISEARCH_MASTER_KEY>
   Secure: False
   MinWorker: 5               # 最小后台工作者, 设置范围[5, 100], 默认5
   MaxLogBuffer: 100          # 最大log缓存条数, 设置范围[10, 10000], 默认100
@@ -114,19 +114,20 @@ Zinc: # Zinc搜索配置
   Password: admin
   Secure: False
 Meili: # Meili搜索配置
-  Host: 127.0.0.1:7700
+  Host: <MEILISEARCH_HOST>:<MEILISEARCH_PORT>
   Index: paopao-data
-  ApiKey: paopao-meilisearch
+  ApiKey: <MEILISEARCH_MASTER_KEY>
   Secure: False
 ObjectStorage: # 对象存储通用配置
   RetainInDays: 2   # 临时对象过期时间多少天
   TempDir: tmp      # 临时对象存放目录名
 AliOSS: # 阿里云OSS存储配置
-  Endpoint: 
-  AccessKeyID: 
-  AccessKeySecret: 
-  Bucket: 
-  Domain: 
+  Endpoint: <OSS_ENDPOINT>
+  AccessKeyID: <OSS_ACCESS_KEY_ID>
+  AccessKeySecret: <OSS_ACCESS_KEY_SECRET> 
+  Bucket: <OSS_BUCKET>
+  Domain: <OSS_DOMAIN>
+  BaseDir: <OSS_BASE_DIR>
 COS: # 腾讯云COS存储配置
   SecretID: 
   SecretKey: 
@@ -164,45 +165,45 @@ Database: # Database通用配置
 MySQL: # MySQL数据库
   Username: paopao
   Password: paopao
-  Host: 127.0.0.1:3306
+  Host: db:3306
   DBName: paopao
   Charset: utf8mb4
   ParseTime: True
   MaxIdleConns: 10
   MaxOpenConns: 30
 Postgres: # PostgreSQL数据库
-  User: paopao
-  Password: paopao
-  DBName: paopao
-  Host: localhost
-  Port: 5432
+  User: <DATABASE_USERNAME>
+  Password: <DATABASE_PASSWORD>
+  DBName: <DATABASE_NAME>
+  Host: <DATABASE_HOST>
+  Port: <DATABASE_PORT>
   SSLMode: disable
   TimeZone: Asia/Shanghai
 Sqlite3: # Sqlite3数据库
   Path: custom/data/sqlite3/paopao-ce.db
 Redis:
   InitAddress:
-    - 127.0.0.1:6379
-  Username:
-  Password:
-  SelectDB:
+    - <REDIS_HOST>:<REDIS_PORT>
+  Username: <REDIS_USERNAME>
+  Password: <REDIS_PASSWORD>
+  SelectDB: <REDIS_DB>
 WebProfile:
   UseFriendship: true              # 前端是否使用好友体系
   EnableTrendsBar: true            # 广场页面是否开启动态条栏功能
   EnableWallet: false              # 是否开启钱包功能
   AllowTweetAttachment: true       # 是否允许推文附件
-  AllowTweetAttachmentPrice: true  # 是否允许推文付费附件
+  AllowTweetAttachmentPrice: false  # 是否允许推文付费附件
   AllowTweetVideo: true            # 是否允许视频推文
-  AllowUserRegister: true          # 是否允许用户注册
-  AllowPhoneBind: true             # 是否允许手机绑定
+  AllowUserRegister: false          # 是否允许用户注册
+  AllowPhoneBind: false             # 是否允许手机绑定
   DefaultTweetMaxLength: 2000      # 推文允许输入的最大长度， 默认2000字，值的范围需要查询后端支持的最大字数
   TweetWebEllipsisSize: 400        # Web端推文作为feed显示的最长字数，默认400字
   TweetMobileEllipsisSize: 300     # 移动端推文作为feed显示的最长字数，默认300字
   DefaultTweetVisibility: public   # 推文可见性，默认好友可见 值: public/following/friend/private
   DefaultMsgLoopInterval: 5000     # 拉取未读消息的间隔，单位：毫秒, 默认5000ms 
-  CopyrightTop: "2023 paopao.info"
-  CopyrightLeft: "Roc's Me"
+  CopyrightTop: "2023 <COMPANY_DOMAIN>" # "2023 paopao.info"
+  CopyrightLeft: "" # "Roc's Me"
   CopyrightLeftLink: ""
-  CopyrightRight: "泡泡(PaoPao)开源社区"
-  CopyrightRightLink: "https://www.paopao.info"
+  CopyrightRight: "<COMPANY_NAME>" # "泡泡(PaoPao)开源社区"
+  CopyrightRightLink: "https://<COMPANY_DOMAIN>" # "https://www.paopao.info"
   
