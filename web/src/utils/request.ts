@@ -38,7 +38,12 @@ service.interceptors.response.use(
                 window.$message.warning(response?.data.msg || '鉴权失败');
             } else {
                 // 打开登录弹窗
-                window.$store.commit('triggerAuth', true);
+                // window.$store.commit('triggerAuth', true);
+
+                if ((window as any).$is_reloading) return;
+                (window as any).$is_reloading = true
+
+                window.location.reload();
             }
         } else {
             window.$message.error(response?.data?.msg || '请求失败');
