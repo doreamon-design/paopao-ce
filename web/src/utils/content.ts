@@ -43,6 +43,7 @@ export const preparePost = (content: string, hint: string, maxSize: number) => {
   }
   const tagExp = /(#|＃)([^#@\s])+?\s+?/g; // 这⾥中⽂#和英⽂#都会识别
   const atExp = /@([a-zA-Z0-9])+?\s+?/g; // 这⾥中⽂#和英⽂#都会识别
+  const urlExp = /((?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-&?=%.]+)/g;
   content = content
     .replace(/<[^>]*?>/gi, "")
     .replace(/(.*?)<\/[^>]*?>/gi, "")
@@ -63,7 +64,8 @@ export const preparePost = (content: string, hint: string, maxSize: number) => {
         item.trim() +
         "</a> "
       );
-    });
+    })
+    .replace(urlExp, '<a href="$1" target="_blank">$1</a>');
   if (isEllipsis) {
     content =
       content.trimEnd() +
