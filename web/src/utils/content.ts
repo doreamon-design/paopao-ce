@@ -27,7 +27,7 @@ export const parsePostTag = (content: string) => {
         "</a> "
       );
     })
-    .replace(urlExp, '<a href="$1" target="_blank">$1</a>');
+    .replace(urlExp, '<a href="$1" target="_blank" onclick="event.stopPropagation()">$1</a>');
   return { content, tags, users };
 };
 
@@ -65,7 +65,7 @@ export const preparePost = (content: string, hint: string, maxSize: number) => {
         "</a> "
       );
     })
-    .replace(urlExp, '<a href="$1" target="_blank">$1</a>');
+    .replace(urlExp, '<a href="$1" target="_blank" onclick="event.stopPropagation()">$1</a>');
   if (isEllipsis) {
     content =
       content.trimEnd() +
