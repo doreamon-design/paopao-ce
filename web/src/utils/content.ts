@@ -3,6 +3,7 @@ export const parsePostTag = (content: string) => {
   const users: string[] = [];
   var tagExp = /(#|＃)([^#@\s])+?\s+?/g; // 这⾥中⽂#和英⽂#都会识别
   var atExp = /@([a-zA-Z0-9])+?\s+?/g; // 这⾥中⽂#和英⽂#都会识别
+  var urlExp = /((?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-&?=%.]+)/g;
   content = content
     .replace(/<[^>]*?>/gi, "")
     .replace(/(.*?)<\/[^>]*?>/gi, "")
@@ -25,7 +26,8 @@ export const parsePostTag = (content: string) => {
         item.trim() +
         "</a> "
       );
-    });
+    })
+    .replace(urlExp, '<a href="$1" target="_blank">$1</a>');
   return { content, tags, users };
 };
 
