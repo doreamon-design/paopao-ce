@@ -34,7 +34,7 @@ service.interceptors.response.use(
         if (+response?.status === 401) {
             localStorage.removeItem('PAOPAO_TOKEN');
 
-            if (response?.data.code !== 10005) {
+            if (response?.data.code !== 10005 && response?.data.code !== 401) {
                 window.$message.warning(response?.data.msg || '鉴权失败');
             } else {
                 // 打开登录弹窗
