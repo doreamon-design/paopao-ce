@@ -3,6 +3,7 @@ export const parsePostTag = (content: string) => {
   const users: string[] = [];
   var tagExp = /(#|＃)([^#@\s])+?\s+?/g; // 这⾥中⽂#和英⽂#都会识别
   var atExp = /@([a-zA-Z0-9])+?\s+?/g; // 这⾥中⽂#和英⽂#都会识别
+  var urlExp = /((?:(?:https?|ftp):\/\/)[\w/\-?=%.]+\.[\w/\-&?=%.]+)/g;
   content = content
     .replace(/<[^>]*?>/gi, "")
     .replace(/(.*?)<\/[^>]*?>/gi, "")
@@ -25,15 +26,21 @@ export const parsePostTag = (content: string) => {
         item.trim() +
         "</a> "
       );
-    });
+    })
+    .replace(urlExp, '<a href="$1" target="_blank" onclick="event.stopPropagation()">$1</a>');
   return { content, tags, users };
 };
 
-export const preparePost = (content: string, hint: string, maxSize: number) => {
-  let isEllipsis = false;
-  if (content.length > maxSize) {
+export const preparePost = (
+  content: string,
+  foldHint: string,
+  unfoldHint: string,
+  maxSize: number,
+  isFold: boolean = true
+) => {
+  const isEllipsis = content.length > maxSize;
+  if (isFold && isEllipsis) {
     content = content.substring(0, maxSize);
-    isEllipsis = true;
     let latestChar = content.charAt(maxSize - 1);
     if (latestChar == "#" || latestChar == "#" || latestChar == "@") {
       content = content.substring(0, maxSize - 1);
@@ -41,6 +48,7 @@ export const preparePost = (content: string, hint: string, maxSize: number) => {
   }
   const tagExp = /(#|＃)([^#@\s])+?\s+?/g; // 这⾥中⽂#和英⽂#都会识别
   const atExp = /@([a-zA-Z0-9])+?\s+?/g; // 这⾥中⽂#和英⽂#都会识别
+  const urlExp = /((?:(?:https?|ftp):\/\/)[\w/\-?=%.]+\.[\w/\-&?=%.]+)/g;
   content = content
     .replace(/<[^>]*?>/gi, "")
     .replace(/(.*?)<\/[^>]*?>/gi, "")
@@ -61,13 +69,14 @@ export const preparePost = (content: string, hint: string, maxSize: number) => {
         item.trim() +
         "</a> "
       );
-    });
+    })
+    .replace(urlExp, '<a href="$1" target="_blank" onclick="event.stopPropagation()">$1</a>');
   if (isEllipsis) {
     content =
       content.trimEnd() +
-      " ..." +
+      (isFold ? "...&nbsp;" : "&nbsp;") +
       '<a class="hash-link" data-detail="post">' +
-      hint +
+      (isFold ? foldHint : unfoldHint) +
       "</a> ";
   }
   return content;
